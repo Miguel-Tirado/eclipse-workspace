@@ -7,11 +7,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
-      <Button layoutX="274.0" layoutY="227.0" mnemonicParsing="false" text="Button" />
-      <Label fx:id="myLabel" layoutX="233.0" layoutY="88.0" text="mm:ss">
+      <Button fx:id="myPlayButton" layoutX="212.0" layoutY="175.0" mnemonicParsing="false" onAction="#playTimer" text="Play" />
+      <Label fx:id="myLabel" layoutX="212.0" layoutY="60.0" prefHeight="98.0" prefWidth="155.0" text="mm:ss">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
+      <Button fx:id="myPauseButton" layoutX="266.0" layoutY="175.0" mnemonicParsing="false" onAction="#pauseTimer" text="Pause" />
+      <Button fx:id="myResetButton" layoutX="331.0" layoutY="175.0" mnemonicParsing="false" onAction="#resetTimer" text="Reset" />
    </children>
 </AnchorPane>
