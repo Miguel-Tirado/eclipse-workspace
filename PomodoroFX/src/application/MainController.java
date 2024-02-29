@@ -16,6 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
 import javafx.util.Duration;
 
 public class MainController implements Initializable{
@@ -23,12 +26,18 @@ public class MainController implements Initializable{
 	@FXML
 	private Label myLabel = new Label(); // Create label to display time left
 	@FXML
-	private Button myPlayButton, myPauseButton, myResetButton;
+	private Button myPlayButton, myPauseButton, myResetButton, mySubmitButton;
+	@FXML
+	private TextField myTextField;
 	
-	private ObjectProperty<java.time.Duration> remainingDuration = new SimpleObjectProperty<>(java.time.Duration.ofSeconds(120));
+	private int timeInSec = 120; // time in sec used for the count down timer.
+	
+	private ObjectProperty<java.time.Duration> remainingDuration = new SimpleObjectProperty<>(java.time.Duration.ofSeconds(timeInSec));
 	
 	private Timeline countDownTimeLine = new Timeline(new KeyFrame(Duration.seconds(1), (ActionEvent event) -> 
 	remainingDuration.setValue(remainingDuration.get().minus(1, ChronoUnit.SECONDS))));
+	
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -55,11 +64,17 @@ public class MainController implements Initializable{
 		
 		// Start the time line
 		//countDownTimeLine.play();
+		
 
 	}
 	
 	public void playTimer() {
-		countDownTimeLine.play();
+		if (remainingDuration.get().toMinutesPart() != 0 ) {
+			countDownTimeLine.play();
+		} else {
+			System.out.println("Reset Time Please.");
+		}
+		
 	}
 	
 	public void pauseTimer() {
@@ -68,6 +83,23 @@ public class MainController implements Initializable{
 	
 	public void resetTimer() {
 		countDownTimeLine.stop();
-		remainingDuration.set(java.time.Duration.ofSeconds(120));
+		remainingDuration.set(java.time.Duration.ofSeconds(timeInSec));
+	}
+	
+	public void submit(ActionEvent event) {
+		try {
+			int timeInMin = 0;
+			timeInMin = Integer.parseInt(myTextField.getText());
+			timeInSec = (int) timeInMin * 60;
+			remainingDuration.set(java.time.Duration.ofSeconds(timeInSec));
+			countDownTimeLine.setCycleCount((int) remainingDuration.get().getSeconds()); // Recalculate the cycle count
+		} 
+		catch (NumberFormatException e) {
+			System.out.println("Enter a number Please.");
+		}
+		catch (Exception e) {
+			System.out.println(e);
+		}
+		
 	}
 }
