@@ -6,17 +6,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f57171;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
-      <Button fx:id="myPlayButton" layoutX="212.0" layoutY="175.0" mnemonicParsing="false" onAction="#playTimer" text="Play" />
+      <Button fx:id="myPlayButton" layoutX="231.0" layoutY="163.0" mnemonicParsing="false" onAction="#playTimer" prefHeight="20.0" prefWidth="50.0" style="-fx-background-color: White;" text="Start" />
       <Label fx:id="myLabel" alignment="CENTER" layoutY="60.0" prefHeight="98.0" prefWidth="600.0" text="mm:ss">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Button fx:id="myPauseButton" layoutX="266.0" layoutY="175.0" mnemonicParsing="false" onAction="#pauseTimer" text="Pause" />
-      <Button fx:id="myResetButton" layoutX="331.0" layoutY="175.0" mnemonicParsing="false" onAction="#resetTimer" text="Reset" />
+      <Button fx:id="myPauseButton" layoutX="287.0" layoutY="163.0" mnemonicParsing="false" onAction="#pauseTimer" prefHeight="20.0" prefWidth="50.0" style="-fx-background-color: white;" text="Pause" />
+      <Button fx:id="myResetButton" layoutX="345.0" layoutY="163.0" mnemonicParsing="false" onAction="#resetTimer" prefHeight="20.0" prefWidth="50.0" style="-fx-background-color: white;" text="Reset" />
       <TextField fx:id="myTextField" layoutX="231.0" layoutY="231.0" prefHeight="25.0" prefWidth="87.0" />
-      <Button fx:id="mySubmitButton" layoutX="328.0" layoutY="231.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
+      <Button fx:id="mySubmitButton" layoutX="328.0" layoutY="231.0" mnemonicParsing="false" onAction="#submit" style="-fx-background-color: white;" text="Submit" />
    </children>
 </AnchorPane>
