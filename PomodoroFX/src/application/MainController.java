@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.net.URL;
 import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
@@ -17,6 +18,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class MainController implements Initializable{
@@ -35,7 +38,9 @@ public class MainController implements Initializable{
 	private Timeline countDownTimeLine = new Timeline(new KeyFrame(Duration.seconds(1), (ActionEvent event) -> 
 	remainingDuration.setValue(remainingDuration.get().minus(1, ChronoUnit.SECONDS))));
 	
-	
+	private File file;
+	private Media mediaAlarm;
+	private MediaPlayer mediaAlarmPlayer;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -57,8 +62,19 @@ public class MainController implements Initializable{
 		// Set number of cycles (remaining duration in Seconds)
 		countDownTimeLine.setCycleCount((int) remainingDuration.get().getSeconds());
 		
+		// ALarm sound
+		//file = new File("C:\\Users\\migue\\eclipse-workspace\\PomodoroFX\\src\\application\\ClassicAlarm.mp3");
+		file = new File("ClassicAlarm.mp3");
+		mediaAlarm = new Media(file.toURI().toString());
+		mediaAlarmPlayer = new MediaPlayer(mediaAlarm);
+		
 		// Show alert when time is up (optional?)
 		countDownTimeLine.setOnFinished(event -> new Alert(Alert.AlertType.INFORMATION).show());
+		//countDownTimeLine.setOnFinished(event -> mediaAlarmPlayer.play());
+		countDownTimeLine.setOnFinished(event -> {
+			mediaAlarmPlayer.play();
+			mediaAlarmPlayer.seek(Duration.seconds(0.0));
+		});
 		
 		// Start the time line
 		//countDownTimeLine.play();
