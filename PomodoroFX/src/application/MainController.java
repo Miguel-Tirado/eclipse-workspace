@@ -42,6 +42,10 @@ public class MainController implements Initializable{
 	private Media mediaAlarm;
 	private MediaPlayer mediaAlarmPlayer;
 	
+	private File file2;
+	private Media mediaButton;
+	private MediaPlayer mediaButtonPlayer;
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -76,6 +80,10 @@ public class MainController implements Initializable{
 			mediaAlarmPlayer.seek(Duration.seconds(0.0));
 		});
 		
+		file2 = new File("Old_Switch_01.wav");
+		mediaButton = new Media(file2.toURI().toString());
+		mediaButtonPlayer = new MediaPlayer(mediaButton);
+		
 		// Start the time line
 		//countDownTimeLine.play();
 		
@@ -85,6 +93,8 @@ public class MainController implements Initializable{
 	public void playTimer() {
 		if (remainingDuration.get().toMinutesPart() != 0 ) {
 			countDownTimeLine.play();
+			mediaButtonPlayer.play();
+			mediaButtonPlayer.seek(Duration.seconds(0.0));
 		} else {
 			System.out.println("Reset Time Please.");
 		}
@@ -93,11 +103,15 @@ public class MainController implements Initializable{
 	
 	public void pauseTimer() {
 		countDownTimeLine.pause();
+		mediaButtonPlayer.play();
+		mediaButtonPlayer.seek(Duration.seconds(0.0));
 	}
 	
 	public void resetTimer() {
 		countDownTimeLine.stop();
 		remainingDuration.set(java.time.Duration.ofSeconds(timeInSec));
+		mediaButtonPlayer.play();
+		mediaButtonPlayer.seek(Duration.seconds(0.0));
 	}
 	
 	public void submit(ActionEvent event) {
@@ -107,6 +121,8 @@ public class MainController implements Initializable{
 			timeInSec = (int) timeInMin * 60;
 			remainingDuration.set(java.time.Duration.ofSeconds(timeInSec));
 			countDownTimeLine.setCycleCount((int) remainingDuration.get().getSeconds()); // Recalculate the cycle count
+			mediaButtonPlayer.play();
+			mediaButtonPlayer.seek(Duration.seconds(0.0));
 		} 
 		catch (NumberFormatException e) {
 			System.out.println("Enter a number Please.");
